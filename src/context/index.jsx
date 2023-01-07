@@ -98,6 +98,38 @@ export const StateContextProvider = ({ children }) => {
     
   }
 
+  const searchCampaigns = async (input) => {
+    if (input==null)input ="";
+    var q= input.toLowerCase();
+    const campaigns = await contract.call('getCampaigns');
+    const parsedCampaings = campaigns.map((campaign, i) => ({
+      owner: campaign.owner,
+      title: campaign.title,
+      description: campaign.description,
+      target: ethers.utils.formatEther(campaign.target.toString()),
+      deadline: campaign.deadline.toNumber(),
+      amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
+      image: campaign.image,
+      category: campaign.category,
+      pId: i
+    }));
+    var temp=[];
+    var arrayLength = parsedCampaings.length;
+    for (var i = 0; i < arrayLength; i++) {
+
+      if(parsedCampaings[i].title.toLowerCase().search(q)>=0 ){
+        temp.push(parsedCampaings[i]);
+      }else if(parsedCampaings[i].description.toLowerCase().search(q)>=0){
+        temp.push(parsedCampaings[i]);
+      }else if(parsedCampaings[i].category.toLowerCase().search(q)>=0 && parsedCampaings[i].category != null ){
+        temp.push(parsedCampaings[i]);
+      }
+    }
+    return temp;
+    
+  }
+
+
   const getUserCampaigns = async () => {
     const allCampaigns = await getCampaigns();
 
@@ -140,6 +172,7 @@ export const StateContextProvider = ({ children }) => {
         getCampaignsbyType,
         getCampaignsbyId,
         getUserCampaigns,
+        searchCampaigns,
         donate,
         getDonations
       }}

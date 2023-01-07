@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { Sidebar, Navbar,  Footer } from './components';
-import { CampaignDetails,Dumb, CreateCampaign, Home, Profile,Search } from './pages';
+import { CampaignDetails,Dumb, CreateCampaign, Home, Profile,Search, AllCharities } from './pages';
 import {useRef} from 'react';
 
 const App = () => {
@@ -24,9 +24,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home ref={resultRef}/>} /> 
           <Route path="/type/:p" element={<Search/>} /> 
+          <Route path="/q/:p" element={<Search/>} /> 
           <Route path="/profile" element={<Profile/>}  />
           <Route path="/create-campaign" element={<CreateCampaign />} />
           <Route path="/campaign-details/:p/:id" element={<Dumb />} />
+          <Route path="/all-charities" element={<AllCharities />} />
         </Routes>
 
         {/* </div> */}

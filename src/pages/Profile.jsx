@@ -4,7 +4,7 @@ import { DisplayCampaigns } from '../components';
 import { useStateContext } from '../context'
 import {useRef} from 'react';
 const Profile = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [campaigns, setCampaigns] = useState([]);
   const ref = useRef(null);
 
@@ -25,7 +25,7 @@ const Profile = () => {
   return (
     <div ref = {ref} className="p-3 mx-5 xl:mx-24 mt-2 min-h-screen">
     <DisplayCampaigns 
-      title="All Charities"
+      title="Your Charities"
       isLoading={isLoading}
       campaigns={campaigns}
     /></div>

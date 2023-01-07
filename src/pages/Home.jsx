@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { DisplayCampaigns, Banner } from '../components';
+import { DisplayCampaigns, Banner,Book } from '../components';
 import { useStateContext } from '../context'
 import { forwardRef } from "react";
 import { calculateBarPercentage, daysLeft } from '../utils';
 const Home = forwardRef((props, ref) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [campaigns, setCampaigns] = useState([]);
   const [campaigns1, setCampaigns1] = useState([]);
   const { address, contract, getCampaigns } = useStateContext();
@@ -13,24 +13,51 @@ const Home = forwardRef((props, ref) => {
   const navigate = useNavigate();
 
   const handleNavigate = (type) => {
-    navigate(`/type/${type.replace(/ /g,"_")}`, { state: type })
-  }
+    // navigate(`/type/${type.replace(/ /g,"_")}`, { state: type })
+    navigate(`/type/${type.replace(/ /g,"_")}` )
+  }  ;
+  const more = () => {
+    // navigate(`/type/${type.replace(/ /g,"_")}`, { state: type })
+    navigate('all-charities' );
+  };
+
   const fetchCampaigns = async () => {
+    if(window.innerWidth>1000)var d = "11px";
+    else var d =window.innerWidth/90+'px';
+    document.documentElement.style.setProperty('--baseline', d);
+    document.documentElement.style.setProperty('--baseline', d);
+    if(window.innerWidth<1000)document.documentElement.style.setProperty('--base-size', window.innerWidth *4);
+    if(window.innerWidth<800)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.3);
+    if(window.innerWidth<600)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.7);
+    if(window.innerWidth<500)document.documentElement.style.setProperty('--base-size', window.innerWidth *5.0);
+
+
     setIsLoading(true);
     const data = await getCampaigns();
     var temp=[];
-    var temp1=[];
+    var temp1=[]; 
     var arrayLength = data.length;
     for (var i = 0; i < arrayLength; i++) {
       if(daysLeft(data[i].deadline)>0){
         temp.push(data[i]);
       }else temp1.push(data[i]);
     }
-    setCampaigns(temp);
+    setCampaigns(temp.slice(0, 8));
     setCampaigns1(temp1);
     setIsLoading(false);
   }
 
+  window.addEventListener('resize', function(event){
+
+    if(window.window.innerWidth>1000)var d = "11px";
+    else var d =window.innerWidth/90+'px';
+    document.documentElement.style.setProperty('--baseline', d);
+    document.documentElement.style.setProperty('--baseline', d);
+    if(window.innerWidth<1000)document.documentElement.style.setProperty('--base-size', window.innerWidth *4);
+    if(window.innerWidth<800)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.0);
+    if(window.innerWidth<600)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.0);
+    if(window.innerWidth<500)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.0);
+  })
   useEffect(() => {
     if(contract) fetchCampaigns();
   }, [address, contract]);
@@ -39,13 +66,14 @@ const Home = forwardRef((props, ref) => {
 <div>
 
     <Banner/>
-    <div ref={ref} className='lg:px-24 px-4 py-10'>
+    <div ref={ref} className='lg:px-24 px-4 pt-10 pb-7'>
   <DisplayCampaigns 
       title="OnGoing Charities"
       isLoading={isLoading}
       campaigns={campaigns}
     /></div>
-    <div className="container1" >
+      <button onClick={() => { more() }}  class="btn1 "><span>More Charities</span></button>
+    <div className="container1 mt-12" >
 
 <div onClick={() => { handleNavigate("Education Charity") }} className="gallery-container ww-3 hh-2">
   <div className="gallery-item">
@@ -101,8 +129,10 @@ const Home = forwardRef((props, ref) => {
   </div>
 </div>
 
+</div>
 
-
+<div className='border-t-[0.5px] border-t-[#3a3a43] mt-5 pt-5 .box1'>
+  <Book/>
 </div>
 <div  className='lg:px-24 px-4 py-10'>
   <DisplayCampaigns 

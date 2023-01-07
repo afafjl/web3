@@ -10,12 +10,12 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
   const handleNavigate = (campaign) => {
     navigate(`/campaign-details/${campaign.title.replace(/ /g,"_")}/${campaign.pId}`)
   }
-  
-  return (
-    <div>
-      <h1 className=" md:ml-5 font-epilogue font-semibold text-[18px] text-white text-left">{title} ({campaigns.length})</h1>
 
-      <div className="flex flex-wrap md:ml-5 mt-[20px] gap-[44px]">
+  return (
+    <div >
+      <h1 className=" md:ml-1 font-epilogue font-semibold text-[18px] text-white text-left">{title}</h1>
+
+      <div className="flex flex-wrap md:ml-1 mt-[20px] gap-[40px]">
         {isLoading && (
           <img src={loader} alt="loader" className="w-[100px] h-[100px] object-contain" />
         )}

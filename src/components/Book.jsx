@@ -68,13 +68,13 @@ const Book = () => {
         <h1 className="page__content-title">Contents</h1>
         <table  className="page__content-table">
           <tr>
-            <td align="left">I.</td><td align="left">Donate now</td><td align="right">3</td>
+            <td align="left">I.</td><td align="left">Introduction</td><td align="right">3</td>
           </tr>
           <tr>
-            <td align="left">II.</td><td align="left">Read more</td><td align="right">43</td>
+            <td align="left">II.</td><td align="left">Story</td><td align="right">43</td>
           </tr>
           <tr>
-            <td align="left">III.</td><td align="left">More infomation</td><td align="right">87</td>
+            <td align="left">III.</td><td align="left">Ending</td><td align="right">87</td>
           </tr>
 
         </table>

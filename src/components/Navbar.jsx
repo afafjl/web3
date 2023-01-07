@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useStateContext } from '../context';
@@ -12,6 +12,9 @@ const Navbar = ({ resultRef }) => {
   const [toggleDrawer, setToggleDrawer] = useState(false);
   const { connect, address } = useStateContext();
   const [message, setMessage] = useState('');
+  const [isHome, setIsHome] = useState(false);
+  const [isProfile, setIsProfile] = useState(false);
+  const [isCharities, setIsCharities] = useState(false);
   const handleChange = (event) => {
     setMessage(event.target.value);
   };
@@ -33,6 +36,26 @@ const Navbar = ({ resultRef }) => {
       behavior: 'smooth',
     })
   };
+  
+  useEffect(() => {
+    var str=window.location.href;
+    var n = str.lastIndexOf('/');
+
+    if(str.substring(n + 1)=="profile"){
+      setIsProfile(true);
+      setIsCharities(false);
+      setIsHome(false);
+    }else if(str.substring(n + 1)=="all-charities"){
+      setIsCharities(true);
+      setIsHome(false);
+      setIsProfile(false);
+    }
+    else if(str.substring(n + 1)==""){
+      setIsHome(true);
+      setIsCharities(false);
+      setIsProfile(false);
+    }
+  }, [location.pathname]);
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[5px] gap-6 ">
       <div className=" lg:flex-1 flex flex-row max-w-[498px]  mb-4 mt-1 py-2 pl-4 pr-2 h-[44px] bg-[#1c1c24] rounded-[100px]">
@@ -48,19 +71,19 @@ const Navbar = ({ resultRef }) => {
 
       <Link to="/">
           <div className=" justify-center items-center cursor-pointer">
-            <p className=" pt-3 pr-2 font-sans text-[14px] mb-10 sm:text-[19px] text-slate-200 hover:text-slate-100 font-medium">Home</p>
+            <p className={` pt-3 pr-2 font-sans text-[14px] mb-10 sm:text-[19px] ${isHome ? 'text-slate-200' : 'text-slate-400'}  hover:text-slate-100 font-medium`}>Home</p>
           </div>
         </Link> 
 
       <Link to="/profile">
           <div className=" justify-center items-center cursor-pointer">
-            <p className=" pt-3 pl-10 font-sans text-[14px] mb-10 sm:text-[19px] text-slate-400 hover:text-slate-100 font-medium">Profile</p>
+            <p className={` pt-3 pl-10 font-sans text-[14px] mb-10 sm:text-[19px] ${isProfile ? 'text-slate-200' : 'text-slate-400'} 0 hover:text-slate-100 font-medium`}>Profile</p>
           </div>
         </Link> 
          
         <Link  to="/">
           <div onClick={onSubmit} className=" justify-center items-center cursor-pointer">
-            <p className="sm:px-5 sm:px-10 font-sans pt-3 tracking-tighter text-[14px] mb-10 sm:text-[19px] text-slate-400 hover:text-slate-100 font-medium">Charities</p>
+            <p className={`sm:px-5 sm:px-10 font-sans pt-3 tracking-tighter text-[14px] ${isCharities ? 'text-slate-200' : 'text-slate-400'} mb-10 sm:text-[19px]  hover:text-slate-100 font-medium`}>Charities</p>
           </div>
         </Link>
         <Link to="/profile">

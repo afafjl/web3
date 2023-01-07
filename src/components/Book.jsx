@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 const Book = () => {
+
     var navigate= useNavigate();
     const onSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +23,11 @@ const Book = () => {
     <div className="page__content" >
       <h1 className="page__content-title">I</h1>
       <div className="page__content-blockquote">
-        <p className="page__content-blockquote-text" >Millions of people around the world are living through crises, but their stories are rarely heard in the mainstream news or raised to global awareness.</p>
+        <p className="  page__content-blockquote-text" >Millions of people around the world are living through crises, but their stories are rarely heard in the mainstream news or raised to global awareness.</p>
+        <p  className=" md:block hidden page__content-blockquote-text" >Around the world are living through crises, but their stories are rarely heard in the mainstream news or raised to global awareness.</p>
+        <p className=" sm:block hidden page__content-blockquote-text" >The Report highlights the severity and magnitude of the challenges before us, with these cascading and intersecting crises creating spin-off impacts on food and nutrition, health, education, the environment, and peace and security, and affecting all the SDGs, the blueprint for more resilient, peaceful and equal societies. </p>
+        <p className=" md:block hidden page__content-blockquote-text" >Living through crises, but their stories are rarely heard in the mainstream news or raised to global awareness.</p>
+ 
    </div>
    <div className="page__content-copyright " onClick={onSubmit}>
 

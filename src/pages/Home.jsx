@@ -19,16 +19,20 @@ const Home = forwardRef((props, ref) => {
   const more = () => {
     // navigate(`/type/${type.replace(/ /g,"_")}`, { state: type })
     navigate('all-charities' );
-  };
+  };    
 
   const fetchCampaigns = async () => {
+
+    document.documentElement.style.setProperty('--baseline', d);
+    document.documentElement.style.setProperty('--baseline', d);
     if(window.innerWidth>1000)var d = "11px";
     else var d =window.innerWidth/90+'px';
     document.documentElement.style.setProperty('--baseline', d);
     document.documentElement.style.setProperty('--baseline', d);
-    if(window.innerWidth<1000)document.documentElement.style.setProperty('--base-size', window.innerWidth *4);
-    if(window.innerWidth<800)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.3);
-    if(window.innerWidth<600)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.7);
+    if(window.innerWidth>=1000)document.documentElement.style.setProperty('--base-size', window.innerWidth *5);
+    if(window.innerWidth<1000)document.documentElement.style.setProperty('--base-size', window.innerWidth *5);
+    if(window.innerWidth<800)document.documentElement.style.setProperty('--base-size', window.innerWidth *5.0);
+    if(window.innerWidth<600)document.documentElement.style.setProperty('--base-size', window.innerWidth *5.0);
     if(window.innerWidth<500)document.documentElement.style.setProperty('--base-size', window.innerWidth *5.0);
 
 
@@ -53,10 +57,11 @@ const Home = forwardRef((props, ref) => {
     else var d =window.innerWidth/90+'px';
     document.documentElement.style.setProperty('--baseline', d);
     document.documentElement.style.setProperty('--baseline', d);
-    if(window.innerWidth<1000)document.documentElement.style.setProperty('--base-size', window.innerWidth *4);
-    if(window.innerWidth<800)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.0);
-    if(window.innerWidth<600)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.0);
-    if(window.innerWidth<500)document.documentElement.style.setProperty('--base-size', window.innerWidth *4.0);
+    if(window.innerWidth>=1000)document.documentElement.style.setProperty('--base-size', window.innerWidth *5);
+    if(window.innerWidth<1000)document.documentElement.style.setProperty('--base-size', window.innerWidth *5);
+    if(window.innerWidth<800)document.documentElement.style.setProperty('--base-size', window.innerWidth *5.0);
+    if(window.innerWidth<600)document.documentElement.style.setProperty('--base-size', window.innerWidth *5.0);
+    if(window.innerWidth<500)document.documentElement.style.setProperty('--base-size', window.innerWidth *5.0);
   })
   useEffect(() => {
     if(contract) fetchCampaigns();

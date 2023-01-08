@@ -46,7 +46,7 @@ const Home = forwardRef((props, ref) => {
         temp.push(data[i]);
       }else temp1.push(data[i]);
     }
-    setCampaigns(temp.slice(0, 8));
+    setCampaigns(temp.reverse().slice(0, 8));
     setCampaigns1(temp1);
     setIsLoading(false);
   }
